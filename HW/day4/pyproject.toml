@@ -1,0 +1,30 @@
+[project]
+name = "day4"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Oporu", email = "70465701+Oporu@users.noreply.github.com" }
+]
+requires-python = "==3.11.14"
+dependencies = [
+    "aiofiles>=25.1.0",
+    "aiopath>=0.6.11",
+    "langchain>=1.2.8",
+    "langchain-core==1.2.8",
+    "langchain-openai>=1.1.7",
+    "langgraph>=1.0.7",
+    "loguru>=0.7.3",
+    "requests>=2.32.5",
+]
+
+[project.scripts]
+day4 = "day4:main"
+
+[tool.uv.build-backend]
+module-root = "src"
+module-name = "day4"
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
