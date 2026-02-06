@@ -35,7 +35,8 @@ async def search_tool_node(state: AgentState):
         logger.error("state search_query not set")
         return {}
 
-    search_result = search_searxng_formatted(state["search_query"])
+    search_query = state["search_query"]
+    search_result = search_searxng_formatted(search_query)
     prompt = search_tool_node_prompt_template.format(user_input=state["user_input"])
     agent = create_agent(model=model, system_prompt=prompt)
 
@@ -51,10 +52,19 @@ async def search_tool_node(state: AgentState):
     response = clean_tokens(response)
     logger.info("search tool summary response: {}", response)
 
-    if not state["search_results"]:
-        return {"search_results": response}
+    old_search_result = state["search_results"]
+    if not old_search_result:
+        old_search_result = ""
+
     return {
-        "search_results": state["search_results"] + response,
+        "search_results": old_search_result
+        + f"""<search_query>
+            {search_query}
+            </search_query>
+            <search_result>
+            {response}
+            <search_result>
+            """,
         "search_times": state["search_times"] + 1,
     }
 
