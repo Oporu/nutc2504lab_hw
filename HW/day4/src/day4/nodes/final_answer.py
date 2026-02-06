@@ -17,8 +17,11 @@ final_answer_node_prompt_template = PromptTemplate.from_file(
 async def final_answer_node(state: AgentState):
     logger.info("node arrived")
     user_input = state["user_input"]
+    cache_hit_answer = state["cache_hit_answer"]
+    if cache_hit_answer:
+        return {"messages": AIMessage(cache_hit_answer)}
+
     prompt = final_answer_node_prompt_template.format(
-        cache_hit_answer=state["cache_hit_answer"],
         search_results=state["search_results"],
     )
     logger.debug("prompt: {}", prompt)
