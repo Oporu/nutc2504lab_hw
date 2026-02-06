@@ -1,0 +1,25 @@
+[project]
+name = "day5-cw1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Oporu", email = "70465701+Oporu@users.noreply.github.com" }
+]
+requires-python = "==3.11.14"
+dependencies = [
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "qdrant-client>=1.16.2",
+]
+
+[project.scripts]
+day5-cw1 = "day5_cw1:main"
+
+[tool.uv.build-backend]
+module-root = "src"
+module-name = "day5_cw1"
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
