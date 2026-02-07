@@ -276,7 +276,7 @@ async def setup_vectorstore():
     pd.DataFrame(answer_data).to_csv(
         config.output_file_path,
         columns=["id", "q_id", "method", "retrieve_text", "score", "source"],
-        index=False,
+        index=False, encoding="utf-8-sig"
     )
     logger.info("saved to {}", config.output_file_path)
 
